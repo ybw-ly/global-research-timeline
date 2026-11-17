@@ -1,0 +1,87 @@
+{
+  "settings": {
+    "request_timeout": 30,
+    "user_agent": "GlobalResearchTimeline/1.0 (+https://github.com/ybw-ly/global-research-timeline)",
+    "contact_email": "",
+    "default_refresh_minutes": 360,
+    "max_items_per_source": 20
+  },
+  "sources": [
+    {
+      "id": "arxiv-ai",
+      "name": "arXiv · AI/ML",
+      "publisher": "arXiv",
+      "adapter": "arxiv",
+      "query": "cat:cs.AI OR cat:cs.LG OR cat:cs.CL",
+      "homepage": "https://arxiv.org/",
+      "country": "US",
+      "language": "en",
+      "doc_type": "paper",
+      "days": 30,
+      "refresh_minutes": 360,
+      "max_items": 20,
+      "enabled": true
+    },
+    {
+      "id": "openalex-climate",
+      "name": "OpenAlex · Climate",
+      "publisher": "OpenAlex",
+      "adapter": "openalex",
+      "query": "climate change",
+      "homepage": "https://openalex.org/",
+      "country": "US",
+      "language": "en",
+      "doc_type": "paper",
+      "days": 30,
+      "refresh_minutes": 720,
+      "max_items": 20,
+      "enabled": true
+    },
+    {
+      "id": "pubmed-longevity",
+      "name": "PubMed · Longevity",
+      "publisher": "PubMed",
+      "adapter": "pubmed",
+      "query": "longevity OR healthy aging",
+      "homepage": "https://pubmed.ncbi.nlm.nih.gov/",
+      "country": "US",
+      "language": "en",
+      "doc_type": "paper",
+      "days": 30,
+      "refresh_minutes": 720,
+      "max_items": 20,
+      "enabled": true
+    },
+    {
+      "id": "federal-register",
+      "name": "US Federal Register",
+      "publisher": "Federal Register",
+      "adapter": "federal_register",
+      "query": "",
+      "homepage": "https://www.federalregister.gov/",
+      "country": "US",
+      "language": "en",
+      "doc_type": "report",
+      "days": 14,
+      "refresh_minutes": 360,
+      "max_items": 20,
+      "enabled": true
+    },
+    {
+      "id": "crossref-ai",
+      "name": "Crossref · AI",
+      "publisher": "Crossref",
+      "adapter": "crossref",
+      "query": "artificial intelligence",
+      "homepage": "https://www.crossref.org/",
+      "country": "US",
+      "language": "en",
+      "doc_type": "paper",
+      "days": 30,
+      "refresh_minutes": 720,
+      "max_items": 15,
+      "enabled": false,
+      "note": "公共 IP 常被 Crossref 限流（429）；设置 contact_email 后可尝试启用，或直接用 OpenAlex。"
+    }
+  ]
+}

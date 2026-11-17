@@ -1,0 +1,16 @@
+services:
+  research-timeline:
+    build: .
+    container_name: global-research-timeline
+    ports:
+      - "8770:8770"
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8770"
+      RESEARCH_DB: /app/data/research.db
+      # Set a token if this port is exposed through a reverse proxy.
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config:ro
+    restart: unless-stopped
