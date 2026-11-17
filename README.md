@@ -42,6 +42,15 @@ run.bat
 
 打开 <http://127.0.0.1:8770>。
 
+### Windows 免安装包
+
+如果电脑上没有 Python，或者双击 `run.bat` 后窗口一闪而过，请到
+[Releases](https://github.com/ybw-ly/global-research-timeline/releases) 下载
+`Global-Research-Timeline-*-win64.zip`。
+
+这个包自带 Python 运行时，解压后直接双击 `run.bat` 即可，不需要安装 Python。
+GitHub 页面上的 **Source code (zip)** 只是源码包，仍然需要本机有 Python 3.10+。
+
 首次启动后后台会自动抓取一轮；也可以点页面右上角 **“刷新元数据”**。
 
 ### Docker
@@ -116,7 +125,8 @@ global-research-timeline/
 | `RESEARCH_DB` | `data/research.db` | SQLite 路径 |
 | `RESEARCH_CONFIG_PATH` | `config/research.json` | 源配置路径 |
 | `RESEARCH_NO_FETCH` | 空 | 设为 `1` 关闭后台抓取 |
-| `ADMIN_TOKEN` | 空 | 设置后 `POST /api/research/refresh` 需 `X-Admin-Token`；不设置仅允许本机回环调用 |
+| `OPEN_BROWSER` | 空 | 设为 `1` 启动后自动打开浏览器 |
+| `ADMIN_TOKEN` | 空 | 设置后 `POST /api/research/refresh` 需 `X-Admin-Token`；不设置时只信任本机或 Host 为 localhost 的请求 |
 
 ---
 
@@ -165,6 +175,41 @@ python3 -m unittest discover -s tests -v
 ```
 
 测试覆盖 arXiv / Crossref / OpenAlex / PubMed / Federal Register 的标准化，以及数据库入库、DOI 去重、筛选和统计；不访问网络。
+
+---
+
+## Windows 常见问题
+
+**双击 `run.bat` 后黑窗口一闪而过**
+
+通常是本机没有安装 Python 3.10+。`run.bat` 现在会停住并显示错误；如果还是闪退，
+说明你下载的是源码包，请改用 Releases 里的 `*-win64.zip` 免安装包。
+
+**提示 `Python 3.10 or newer was not found`**
+
+从 <https://www.python.org/downloads/> 安装 Python，安装时勾选
+“Add python.exe to PATH”；或者直接下载免安装包。
+
+**解压后双击没反应 / 被拦截**
+
+不要直接在压缩包里双击。先把 zip 完整解压到普通目录，例如
+`C:\Global-Research-Timeline`，再运行 `run.bat`。如果 zip 是从网上下载的，
+可以在 zip 文件上右键 → 属性 → 勾选“解除锁定”，然后再解压。
+
+**端口被占用**
+
+默认端口是 `8770`；如果被占用，服务会自动尝试 `8771`–`8789`。
+启动窗口里会打印实际地址，以窗口显示的地址为准。
+
+**想看具体报错**
+
+在解压目录的地址栏输入 `cmd` 回车，然后执行：
+
+```bat
+run.bat
+```
+
+这样窗口不会自动关闭，错误信息会保留。
 
 ---
 

@@ -13,6 +13,7 @@ import mimetypes
 import os
 import sys
 import threading
+import webbrowser
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -30,6 +31,7 @@ HOST = os.environ.get("HOST", "127.0.0.1")
 PORT = int(os.environ.get("PORT", "8770"))
 NO_FETCH = os.environ.get("RESEARCH_NO_FETCH", "").lower() in ("1", "true", "yes")
 ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN", "").strip()
+OPEN_BROWSER = os.environ.get("OPEN_BROWSER", "").lower() in ("1", "true", "yes")
 
 CSP = (
     "default-src 'self'; img-src 'self' https: data:; "
@@ -235,6 +237,9 @@ def main() -> int:
     print(f"  database: {DB_PATH}")
     print("  Ctrl+C to stop")
     print()
+    if OPEN_BROWSER:
+        display_host = "127.0.0.1" if HOST in ("0.0.0.0", "::") else HOST
+        threading.Timer(1.0, webbrowser.open, args=(f"http://{display_host}:{port}",)).start()
     try:
         server.serve_forever()
     except KeyboardInterrupt:
